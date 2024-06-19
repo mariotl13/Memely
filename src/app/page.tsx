@@ -1,8 +1,10 @@
 "use client"
-import Tabs from "@/shared/components/tabs/tabs";
+import Tabs, { TabsConfig } from "@/shared/components/tabs/tabs";
 import { useEffect, useState } from "react";
 
 export default function Home() {
+
+    
 
     useEffect(() => {
         console.log("hola?");
@@ -10,7 +12,7 @@ export default function Home() {
 
     return (
         <>
-            <Tabs></Tabs>
+            {/* <Tabs tabsConfig={tabsConfig}></Tabs> */}
         </>
     );
 }
