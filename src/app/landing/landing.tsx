@@ -3,8 +3,10 @@
 import Tabs, { TabsConfig } from "@/shared/components/tabs/tabs";
 
 export default function Landing({
+    inter,
     children,
 }: Readonly<{
+    inter: any;
     children: React.ReactNode;
 }>) {
 
@@ -30,17 +32,19 @@ export default function Landing({
     }
 
     return (
-        <>
-            <header>
-                <p>HEADER</p>
-                <Tabs tabsConfig={tabsConfig}>
-                    <button onClick={handleOnClick}>Soy un botón</button>
-                </Tabs>
-            </header>
-            <main>
-                {children}
-            </main>
-            <footer>FOOTER</footer>
-        </>
+        <html lang="en">
+            <body className={inter.className}>
+                <header>
+                    <p>HEADER</p>
+                    <Tabs tabsConfig={tabsConfig}>
+                        <button onClick={handleOnClick}>Soy un botón</button>
+                    </Tabs>
+                </header>
+                <main>
+                    {children}
+                </main>
+                <footer>FOOTER</footer>
+            </body>
+        </html>
     )
 }

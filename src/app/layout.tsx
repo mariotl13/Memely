@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.scss";
-import Tabs, { TabsConfig } from "@/shared/components/tabs/tabs";
 import Landing from "./landing/landing";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,12 +17,6 @@ export default function RootLayout({
 }>) {
 
     return (
-        <html lang="en">
-            <body className={inter.className}>
-                <Landing>
-                    {children}
-                </Landing>
-            </body>
-        </html>
+        <Landing inter={inter}>{children}</Landing>
     );
 }
