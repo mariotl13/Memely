@@ -1,8 +1,8 @@
 "use client"
 
 import Tabs, { TabsConfig } from "@/shared/components/tabs/tabs";
-import { useEffect } from "react";
-import apiService from '../../shared/services/api.service';
+import { useEffect, useState } from "react";
+import MemeApiService from '../../shared/services/MemeApi.service';
 
 export default function Landing({
     inter,
@@ -12,20 +12,17 @@ export default function Landing({
     children: React.ReactNode;
 }>) {
 
+    const [memes, setMemes] = useState([]);
+
     useEffect(() => {
-        apiService.get('https://api.imgflip.com/get_memes')
-        .then((responseData: any)=> {
-            console.log('dataaaa', responseData);
-        })
-        .catch((error: any) => {
-            console.log('errorrr', error);
-        });
+        const response = MemeApiService.get("https://api.imgflip.com/get_memes");
+        response.then((memes) => setMemes(memes))
     }, []);
 
     const tabsConfig: TabsConfig[] = [
         {
             label: 'Tab 1',
-            url: '/contact'
+            url: '/random-meme'
         },
         {
             label: 'Tab 2',
@@ -37,20 +34,12 @@ export default function Landing({
         }
     ]
 
-    const value = 'pulsadoooo';
-
-    const handleOnClick = () => {
-        console.log(value);
-    }
-
     return (
         <html lang="en">
             <body className={inter.className}>
                 <header>
                     <p>HEADER</p>
-                    <Tabs tabsConfig={tabsConfig}>
-                        <button onClick={handleOnClick}>Soy un botón</button>
-                    </Tabs>
+                    <Tabs tabsConfig={tabsConfig}></Tabs>
                 </header>
                 <main>
                     {children}

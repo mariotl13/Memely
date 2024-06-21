@@ -12,11 +12,10 @@ export interface TabsConfig {
     url: string;
 }
 
-export default function Tabs({tabsConfig, children}: TabsProps) {
+export default function Tabs({tabsConfig}: TabsProps) {
 
     return (
         <div className="tabs">
-            <p>{children}</p>
             {
                 tabsConfig.map(tab => {
                     return <Link href={tab.url} key={tab.label}>{tab.label}</Link>
