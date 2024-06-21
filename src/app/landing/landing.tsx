@@ -1,8 +1,6 @@
 "use client"
 
 import Tabs, { TabsConfig } from "@/shared/components/tabs/tabs";
-import { useEffect, useState } from "react";
-import MemeApiService from '../../shared/services/MemeApi.service';
 
 export default function Landing({
     inter,
@@ -11,13 +9,6 @@ export default function Landing({
     inter: any;
     children: React.ReactNode;
 }>) {
-
-    const [memes, setMemes] = useState([]);
-
-    useEffect(() => {
-        const response = MemeApiService.get("https://api.imgflip.com/get_memes");
-        response.then((memes) => setMemes(memes))
-    }, []);
 
     const tabsConfig: TabsConfig[] = [
         {
