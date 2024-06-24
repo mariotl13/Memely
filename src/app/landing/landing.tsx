@@ -28,6 +28,9 @@ export default function Landing({
 
     return (
         <html lang="en">
+            <head>
+                <link rel="icon" href="../favicon.ico" sizes="any" />
+            </head>
             <body className={inter.className}>
                 <header>
                     <Tabs tabsConfig={tabsConfig}></Tabs>
