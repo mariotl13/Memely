@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link";
 import { PropsWithChildren } from "react";
+import "./tabs.scss";
 
 
 export interface TabsProps extends PropsWithChildren {
@@ -18,7 +19,7 @@ export default function Tabs({tabsConfig}: TabsProps) {
         <div className="tabs">
             {
                 tabsConfig.map(tab => {
-                    return <Link href={tab.url} key={tab.label}>{tab.label}</Link>
+                    return <Link className="tab-link" href={tab.url} key={tab.label}>{tab.label}</Link>
                 })
             }
         </div>

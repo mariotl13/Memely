@@ -12,30 +12,33 @@ export default function Landing({
 
     const tabsConfig: TabsConfig[] = [
         {
-            label: 'Tab 1',
+            label: 'Generar meme',
             url: '/random-meme'
         },
         {
-            label: 'Tab 2',
-            url: '/contact'
+            label: 'Votación',
+            url: '/vote'
         },
         {
-            label: 'Tab 3',
-            url: '/contact'
-        }
+            label: 'Ranking',
+            url: '/ranking'
+        },
+        // {
+        //     label: 'Historial',
+        //     url: '/historial'
+        // }
     ]
 
     return (
         <html lang="en">
             <body className={inter.className}>
                 <header>
-                    <p>HEADER</p>
                     <Tabs tabsConfig={tabsConfig}></Tabs>
                 </header>
-                <main>
+                <main style={{ padding: '64px 0px' }}>
                     {children}
                 </main>
-                <footer>FOOTER</footer>
+                {/* <footer>FOOTER</footer> */}
             </body>
         </html>
     )

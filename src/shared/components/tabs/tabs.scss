@@ -1,0 +1,14 @@
+.tabs {
+    display: flex;
+    gap: 12px;
+
+    .tab-link {
+        padding: 12px;
+
+        background-color: #333;
+        color: white;
+        border-radius: 4px;
+
+        text-decoration: none;
+    }
+}

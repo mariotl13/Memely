@@ -1,1 +1,12 @@
 // <bloque>__<elemento>--<modificador>
+
+
+:root {
+    --primary: #D49C5F;
+    --text: #303030;
+}
+
+html {
+    background-color: var(--primary);
+    color: var(--text);
+}
