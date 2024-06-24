@@ -27,20 +27,19 @@ export default function RandomMeme() {
 
     const [meme, setMeme] = useState<Meme>();
     const [memeGenerated, setMemeGenerated] = useState<string>();
-    const [showSpinner, setShowSpinner] = useState<boolean>();
-
-    // let showSpinner = false;
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const response = MemeApiService.get("https://api.imgflip.com/get_memes");
         response.then((memes: MemesData) => {
             const randomIndex = Math.floor(Math.random() * memes.data.memes.length);
-            setMeme(memes.data.memes[randomIndex])
+            setMeme(memes.data.memes[randomIndex]);
+            setIsLoading(false);
         } )
     }, []);
 
     const handleSubmit = (e: any) => {
-        setShowSpinner(true);
+        setIsLoading(true);
 
         // Prevent the browser from reloading the page
         e.preventDefault();
@@ -56,54 +55,59 @@ export default function RandomMeme() {
         }
 
         let values = Array.from(formData.values());
-        const color = values.pop();
+        // const color = values.pop();
 
         values.forEach((caption, index) => {
             body = {
                 ...body,
                 [`boxes[${index}][text]`]: caption,
-                [`boxes[${index}][color]`]: color
+                // [`boxes[${index}][color]`]: color
             }
         });
 
         MemeApiService.post("https://api.imgflip.com/caption_image", body).then((data) => {
             setMemeGenerated(data.data.url);
-            console.log(data);
-            setShowSpinner(false);
+            setIsLoading(false);
         });
     }
 
     return (
         <div className="meme-container">
-            <img src={memeGenerated ?? meme?.url} alt="Random meme" />
 
-            {showSpinner && <Spinner></Spinner>}
+            {isLoading ?
+                <div className="image-placeholder">
+                    <Spinner></Spinner>
+                </div> :
+                <>
+                    <img src={memeGenerated ?? meme?.url} alt="Random meme" />
 
-            <form method="post" onSubmit={handleSubmit}>
-                {
-                    Array.from({ length: meme?.box_count ?? 0 }, (_, i) =>
-                        <label key={i}>
-                            Caption {i + 1}
-                            <input name={"caption" + i} />
-                        </label>
-                    )
-                }
-                <div className="color-container">
-                    <div>
-                        <input type="checkbox" />
-                        <span>Custom color</span>
+                    <form method="post" onSubmit={handleSubmit}>
+                    {
+                        Array.from({ length: meme?.box_count ?? 0 }, (_, i) =>
+                            <label key={i}>
+                                Caption {i + 1}
+                                <input name={"caption" + i} />
+                            </label>
+                        )
+                    }
+                    {/* <div className="color-container">
+                        <div>
+                            <input type="checkbox" />
+                            <span>Custom color</span>
+                        </div>
+                        <input type="color" name="color" />
                     </div>
-                    <input type="color" name="color" />
-                </div>
-                <div className="color-container">
-                    <div>
-                        <input type="checkbox" />
-                        <span>Custom outline color</span>
-                    </div>
-                    <input type="color" name="outsideColor" />
-                </div>
-                <button type="submit">Generar meme</button>
-            </form>
+                    <div className="color-container">
+                        <div>
+                            <input type="checkbox" />
+                            <span>Custom outline color</span>
+                        </div>
+                        <input type="color" name="outsideColor" />
+                    </div> */}
+                    <button type="submit" disabled={isLoading}>Generar meme</button>
+                </form>
+            </>
+            }
         </div>
     )
 }

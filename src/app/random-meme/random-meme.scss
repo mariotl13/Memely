@@ -1,21 +1,35 @@
 .meme-container {
     display: flex;
-    align-items: center;
     gap: 24px;
 
     img {
         width: 400px;
     }
 
+    .image-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 400px;
+    }
+
     form {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 12px;
 
         label {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 4px;
+
+            font-weight: bold;
+
+            input {
+                border: none;
+                padding: 8px;
+                border-radius: 4px;
+            }
         }
 
         .color-container {
@@ -33,6 +47,11 @@
             color: white;
 
             cursor: pointer;
+
+            &:disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+            }
         }
     }
 }
