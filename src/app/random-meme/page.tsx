@@ -79,22 +79,31 @@ export default function RandomMeme() {
 
             {showSpinner && <Spinner></Spinner>}
 
-            <div className="inputs-container">
-                <form method="post" onSubmit={handleSubmit}>
-                    {
-                        Array.from({ length: meme?.box_count ?? 0 }, (_, i) =>
-                            <div key={i}>
-                                <label>
-                                    Caption {i + 1}:
-                                    <input name={"caption" + i} />
-                                </label>
-                            </div>
-                        )
-                    }
+            <form method="post" onSubmit={handleSubmit}>
+                {
+                    Array.from({ length: meme?.box_count ?? 0 }, (_, i) =>
+                        <label key={i}>
+                            Caption {i + 1}
+                            <input name={"caption" + i} />
+                        </label>
+                    )
+                }
+                <div className="color-container">
+                    <div>
+                        <input type="checkbox" />
+                        <span>Custom color</span>
+                    </div>
                     <input type="color" name="color" />
-                    <button type="submit">Submit form</button>
-                </form>
-            </div>
+                </div>
+                <div className="color-container">
+                    <div>
+                        <input type="checkbox" />
+                        <span>Custom outline color</span>
+                    </div>
+                    <input type="color" name="outsideColor" />
+                </div>
+                <button type="submit">Generar meme</button>
+            </form>
         </div>
     )
 }

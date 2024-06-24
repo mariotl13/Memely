@@ -1,6 +1,7 @@
 "use client"
 
 import Tabs, { TabsConfig } from "@/shared/components/tabs/tabs";
+import "./landing.scss"
 
 export default function Landing({
     inter,
@@ -22,11 +23,7 @@ export default function Landing({
         {
             label: 'Ranking',
             url: '/ranking'
-        },
-        // {
-        //     label: 'Historial',
-        //     url: '/historial'
-        // }
+        }
     ]
 
     return (
@@ -35,10 +32,9 @@ export default function Landing({
                 <header>
                     <Tabs tabsConfig={tabsConfig}></Tabs>
                 </header>
-                <main style={{ padding: '64px 0px' }}>
+                <main>
                     {children}
                 </main>
-                {/* <footer>FOOTER</footer> */}
             </body>
         </html>
     )

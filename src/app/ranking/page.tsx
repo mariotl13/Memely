@@ -1,4 +1,4 @@
-
+import "./ranking.scss"
 
 
 export interface Ranking {
