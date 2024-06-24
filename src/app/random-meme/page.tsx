@@ -42,30 +42,23 @@ export default function RandomMeme() {
         // Read the form data
         const form = e.target;
         const formData = new FormData(form);
-        let values: {text: string}[] = [];
-        formData.forEach(caption => {
-            values.push({text: caption.toString() })
-        });
 
-        console.log('xdd', values);
-
-        // You can pass formData as a fetch body directly:
-        // fetch('/some-api', { method: form.method, body: formData });
-
-        // Or you can work with it as a plain object:
-        // const formJson = Object.fromEntries(formData.entries());
-        // console.log(formJson);
-
-        MemeApiService.post("https://api.imgflip.com/caption_image", {
+        let body: any = {
             template_id: meme?.id,
             username: 'MarioTL13',
             password: 'vigilantPotato',
-            // text0: 'dwedewd'
-            // boxes: JSON.stringify(values)
-            "boxes[0][text]": "aaa"
-        }).then((data) => {
+        }
+
+        Array.from(formData.values()).forEach((caption, index) => {
+            body = {
+                ...body,
+                [`boxes[${index}][text]`]: caption
+            }
+        });
+
+        MemeApiService.post("https://api.imgflip.com/caption_image", body).then((data) => {
             setMemeGenerated(data.data.url);
-            console.log(data); // JSON data parsed by `data.json()` call
+            console.log(data);
         });
     }
 
@@ -73,7 +66,7 @@ export default function RandomMeme() {
         <div className="meme-container">
             <img src={meme?.url} alt="random-meme" />
 
-            {memeGenerated ? <img src={memeGenerated} alt="memeGenerated" /> : null}
+            {memeGenerated && <img src={memeGenerated} alt="memeGenerated" />}
 
             <div className="inputs-container">
                 <form method="post" onSubmit={handleSubmit}>
