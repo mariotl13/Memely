@@ -2,23 +2,8 @@
 
 import Tabs, { TabsConfig } from "@/shared/components/tabs/tabs";
 import "./landing.scss"
-
-// Import the functions you need from the SDKs
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyDikq7mfP-krJ5IAsQlY1prbc5B5CutChE",
-    authDomain: "vigilant-potato-bc522.firebaseapp.com",
-    projectId: "vigilant-potato-bc522",
-    storageBucket: "vigilant-potato-bc522.appspot.com",
-    messagingSenderId: "1666480283",
-    appId: "1:1666480283:web:75da1769f7d9a947ed2e3e",
-    measurementId: "G-X9XDLHRFMH"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+import signUp from "@/firebase/auth/signUp";
+import { useRouter } from "next/navigation";
 
 export default function Landing({
     inter,
@@ -27,6 +12,8 @@ export default function Landing({
     inter: any;
     children: React.ReactNode;
 }>) {
+
+    const router = useRouter();
 
     const tabsConfig: TabsConfig[] = [
         {
@@ -50,7 +37,7 @@ export default function Landing({
             </head>
             <body className={inter.className}>
                 <header>
-                    <button onClick={createUser}>Crear usuario de prueba</button>
+                    <button onClick={clientSignUp}>Crear usuario de prueba</button>
                     <Tabs tabsConfig={tabsConfig}></Tabs>
                 </header>
                 <main>
@@ -60,23 +47,16 @@ export default function Landing({
         </html>
     )
 
-    function createUser() {
-        const auth = getAuth();
+    async function clientSignUp() {
         const email = "prueba@gmail.com";
         const password = "prueba123";
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed up 
-                const user = userCredential.user;
-                console.log(user);
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log("code", errorCode);
-                console.log("message", errorCode);
-                // ..
-            });
+        const { result, error } = await signUp(email, password);
+
+        if (error) {
+            return console.log(error)
+        }
+
+        console.log(result)
+        return router.push("/random-meme")
     }
 }
