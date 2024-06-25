@@ -9,17 +9,15 @@ export async function GET() {
             // Convertir el objeto en un array
             const usersArray = Object.keys(data).map((key) => ({
                 id: key,
-                name: data[key].name,
-                mail: data[key].mail,
-                points: data[key].points
+                ...data[key]
             }));
             return NextResponse.json(usersArray);
         }
 
-        return NextResponse.json([{user: 'null', points: 0}]);
+        return NextResponse.json(null);
     }
     catch (error) {
         console.error("Error getting data:", error);
-        return NextResponse.json([{user: 'null', points: 0}]);
+        return NextResponse.json(null);
     }
 }

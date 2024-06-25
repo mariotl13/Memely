@@ -78,36 +78,34 @@ export default function RandomMeme() {
                 <div className="image-placeholder">
                     <Spinner></Spinner>
                 </div> :
-                <>
-                    <img src={memeGenerated ?? meme?.url} alt="Random meme" />
-
-                    <form method="post" onSubmit={handleSubmit}>
-                    {
-                        Array.from({ length: meme?.box_count ?? 0 }, (_, i) =>
-                            <label key={i}>
-                                Caption {i + 1}
-                                <input name={"caption" + i} />
-                            </label>
-                        )
-                    }
-                    {/* <div className="color-container">
-                        <div>
-                            <input type="checkbox" />
-                            <span>Custom color</span>
-                        </div>
-                        <input type="color" name="color" />
-                    </div>
-                    <div className="color-container">
-                        <div>
-                            <input type="checkbox" />
-                            <span>Custom outline color</span>
-                        </div>
-                        <input type="color" name="outsideColor" />
-                    </div> */}
-                    <button type="submit" disabled={isLoading}>Generar meme</button>
-                </form>
-            </>
+                <img src={memeGenerated ?? meme?.url} alt="Random meme" />
             }
+
+            <form method="post" onSubmit={handleSubmit}>
+                {
+                    Array.from({ length: meme?.box_count ?? 0 }, (_, i) =>
+                        <label key={i}>
+                            Caption {i + 1}
+                            <input name={"caption" + i} />
+                        </label>
+                    )
+                }
+                {/* <div className="color-container">
+                    <div>
+                        <input type="checkbox" />
+                        <span>Custom color</span>
+                    </div>
+                    <input type="color" name="color" />
+                </div>
+                <div className="color-container">
+                    <div>
+                        <input type="checkbox" />
+                        <span>Custom outline color</span>
+                    </div>
+                    <input type="color" name="outsideColor" />
+                </div> */}
+                <button type="submit" disabled={isLoading}>Generar meme</button>
+            </form>
         </div>
     )
 }
