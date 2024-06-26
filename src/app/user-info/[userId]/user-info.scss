@@ -1,0 +1,33 @@
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    .user-header {
+        margin-bottom: 32px;
+    }
+
+    .memes-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit,
+                minmax(200px,
+                    1fr));
+        gap: 1rem;
+
+        .meme {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            h3 {
+                text-align: center;
+            }
+        }
+    }
+
+    h2,
+    h3 {
+        margin: 0;
+    }
+}
