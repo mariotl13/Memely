@@ -4,7 +4,6 @@ import MemeApiService from "@/shared/services/MemeApi.service";
 import { useEffect, useState } from "react";
 import './user-info.scss';
 import Spinner from "@/shared/components/spinner/spinner";
-import { stringToDate } from "@/shared/utils/dates";
 
 
 export interface UserData {
@@ -32,7 +31,7 @@ export default function UserInfo({ params }:any) {
             data.memes = Object.keys(data.memes).map((key: string) => ({
                 ...data.memes[key as any],
                 id: key,
-                date: stringToDate(key)
+                date: new Date(key)
             }));
             setUser(data);
             setIsLoading(false);

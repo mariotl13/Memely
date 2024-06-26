@@ -11,14 +11,14 @@ export default class MemeApiService {
         }
     }
 
-    static async post(endpoint: string, data = {}) {
+    static async post(endpoint: string, data = {}, useJson = false) {
         try {
             const response = await fetch(endpoint, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: new URLSearchParams(data)
+                body: useJson ? JSON.stringify(data) : new URLSearchParams(data)
             });
             return response.json();
         } catch (error) {

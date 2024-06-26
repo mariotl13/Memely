@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import "./random-meme.scss";
+import "./meme-generator.scss";
 import MemeApiService from "@/shared/services/MemeApi.service";
 import Spinner from "@/shared/components/spinner/spinner";
 
@@ -23,7 +23,7 @@ export interface Meme {
 }
 
 
-export default function RandomMeme() {
+export default function MemeGenerator() {
 
     const [meme, setMeme] = useState<Meme>();
     const [memeGenerated, setMemeGenerated] = useState<string>();
@@ -66,8 +66,22 @@ export default function RandomMeme() {
         });
 
         MemeApiService.post("https://api.imgflip.com/caption_image", body).then((data) => {
-            setMemeGenerated(data.data.url);
-            setIsLoading(false);
+            const newMeme = {
+                points: 0,
+                template: meme?.id,
+                url: data.data.url
+            };
+
+            // TODO: poner id del usuario logeado
+            const USER_ID = 'Vcqap82uXcNz6pJHTTlvtKYZ99i2';
+
+            const today = new Date();
+            const memeId = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+
+            MemeApiService.post(`http://localhost:3000/api/meme-generator/${USER_ID}/memes/${memeId}`, newMeme, true).then(() => {
+                setMemeGenerated(data.data.url);
+                setIsLoading(false);
+            });
         });
     }
 

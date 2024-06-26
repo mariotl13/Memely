@@ -18,7 +18,7 @@ export default function Landing({
     const tabsConfig: TabsConfig[] = [
         {
             label: 'Generar meme',
-            url: '/random-meme'
+            url: '/meme-generator'
         },
         {
             label: 'Votación',
@@ -54,6 +54,6 @@ export default function Landing({
         }
 
         console.log(result)
-        return router.push("/random-meme")
+        return router.push("/meme-generator")
     }
 }
