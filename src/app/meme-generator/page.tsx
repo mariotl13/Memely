@@ -78,7 +78,7 @@ export default function MemeGenerator() {
 
             const memeId = getDateId(new Date());
 
-            MemeApiService.post(`http://localhost:3000/api/meme-generator/${USER_ID}/memes/${memeId}`, newMeme, true).then(() => {
+            MemeApiService.post(`http://localhost:3000/api/meme-generator/${USER_ID}/${memeId}`, newMeme, true).then(() => {
                 setMemeGenerated(data.data.url);
                 setIsLoading(false);
             });
