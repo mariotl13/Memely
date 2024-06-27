@@ -17,12 +17,8 @@ export default function Landing({
 
     const tabsConfig: TabsConfig[] = [
         {
-            label: 'Generar meme',
-            url: '/meme-generator'
-        },
-        {
-            label: 'Votación',
-            url: '/vote'
+            label: 'Home',
+            url: '/home'
         },
         {
             label: 'Ranking',

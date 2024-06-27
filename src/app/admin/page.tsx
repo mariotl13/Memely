@@ -4,7 +4,7 @@ import Spinner from "@/shared/components/spinner/spinner";
 import MemeApiService from "@/shared/services/MemeApi.service";
 import { ChangeEvent, useEffect, useState } from "react";
 import './admin.scss';
-import { Meme, MemesData } from "../meme-generator/page";
+import { Meme, MemesData } from "../home/meme-generator/meme-generator";
 
 
 export interface AdminInfo {
