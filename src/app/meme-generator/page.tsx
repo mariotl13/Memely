@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./meme-generator.scss";
 import MemeApiService from "@/shared/services/MemeApi.service";
 import Spinner from "@/shared/components/spinner/spinner";
+import { getDateId } from "@/shared/utils/date";
 
 
 export interface MemesData {
@@ -75,8 +76,7 @@ export default function MemeGenerator() {
             // TODO: poner id del usuario logeado
             const USER_ID = 'Vcqap82uXcNz6pJHTTlvtKYZ99i2';
 
-            const today = new Date();
-            const memeId = `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+            const memeId = getDateId(new Date());
 
             MemeApiService.post(`http://localhost:3000/api/meme-generator/${USER_ID}/memes/${memeId}`, newMeme, true).then(() => {
                 setMemeGenerated(data.data.url);

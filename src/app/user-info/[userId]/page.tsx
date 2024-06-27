@@ -27,7 +27,6 @@ export default function UserInfo({ params }:any) {
     useEffect(() => {
         const response = MemeApiService.get(`http://localhost:3000/api/user-info/${params.userId}`);
         response.then((data: UserData) => {
-            console.log('infoooo', data);
             data.memes = Object.keys(data.memes).map((key: string) => ({
                 ...data.memes[key as any],
                 id: key,

@@ -7,7 +7,7 @@ export default class MemeApiService {
             const response = await fetch(endpoint, params);
             return response.json();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 
@@ -22,7 +22,7 @@ export default class MemeApiService {
             });
             return response.json();
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 };

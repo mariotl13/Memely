@@ -1,0 +1,50 @@
+.votes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        width: 400px;
+    }
+
+    .vote-buttons {
+        display: flex;
+        gap: 4px;
+
+        margin: 16px 0px;
+
+        button {
+            border-radius: 50%;
+            background-color: white;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+
+            &:hover,
+            &.selected-vote {
+                background-color: mediumseagreen;
+                color: white;
+            }
+        }
+    }
+
+    .confirm-button {
+        padding: 16px;
+        border-radius: 4px;
+
+        border: none;
+        background-color: mediumseagreen;
+        color: white;
+
+        cursor: pointer;
+
+        &:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        &:hover:not(:disabled) {
+            opacity: 0.8;
+        }
+    }
+}

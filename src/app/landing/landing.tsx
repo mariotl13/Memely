@@ -50,7 +50,7 @@ export default function Landing({
         const { result, error } = await signUp(email, password);
 
         if (error) {
-            return console.log(error)
+            return console.error(error)
         }
 
         console.log(result)
