@@ -118,7 +118,7 @@ export default function MemeGenerator() {
                     </div>
                     <input type="color" name="outsideColor" />
                 </div> */}
-                <button type="submit" disabled={isLoading}>Generar meme</button>
+                <button type="submit" disabled={isLoading} className="submit-button">Generar meme</button>
             </form>
         </div>
     )

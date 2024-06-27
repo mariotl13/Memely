@@ -27,7 +27,12 @@ export default function Landing({
         {
             label: 'Ranking',
             url: '/ranking'
-        }
+        },
+        // TODO: user has role === 'admin'
+        ...(true ? [{
+            label: 'Admin',
+            url: '/admin'
+        }] : [])
     ]
 
     return (
