@@ -20,7 +20,7 @@ export default function Home() {
     const renderSwitch = (param: StatusType) => {
         switch(param) {
             case 'closed':
-                return 'Vuelve el viernes para crear tu meme (*￣3￣)╭';
+                return 'Vuelve el viernes para crear tu meme ༼ つ ◕_◕ ༽つ';
             case 'meming':
                 return <MemeGenerator></MemeGenerator>;
             case 'voting':

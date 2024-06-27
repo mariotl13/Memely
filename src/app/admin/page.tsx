@@ -16,6 +16,7 @@ export type StatusType = 'closed' | 'meming' | 'voting';
 
 export default function Admin() {
 
+    const [currentState, setCurrentState] = useState<StatusType>();
     const [adminInfo, setAdminInfo] = useState<AdminInfo>();
     const [isLoading, setisLoading] = useState<boolean>(true);
 
@@ -23,6 +24,7 @@ export default function Admin() {
         const response = MemeApiService.get("http://localhost:3000/api/admin");
         response.then((data: AdminInfo) => {
             setAdminInfo(data);
+            setCurrentState(data.status);
             setisLoading(false);
         })
     }, []);
@@ -51,8 +53,17 @@ export default function Admin() {
         e.preventDefault();
 
         setisLoading(true);
+
         MemeApiService.post(`http://localhost:3000/api/admin`, adminInfo, true).then(() => {
-            setisLoading(false);
+            if (currentState === "voting" && adminInfo?.status === "closed") {
+                MemeApiService.post(`http://localhost:3000/api/ranking`).then(() => {
+                    setisLoading(false);
+                });
+            } else {
+                setisLoading(false);
+            }
+
+            setCurrentState(adminInfo?.status);
         });
     }
 

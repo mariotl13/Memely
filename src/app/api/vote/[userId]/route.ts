@@ -40,24 +40,6 @@ export async function POST(request: NextRequest, { params }: any) {
         await setData(`votes/${dateId}/${userId}/${body.votedUserId}`, body.vote);
         await transaction(`users/${body.votedUserId}/memes/${dateId}/points`, (currentPoints: number) => currentPoints + body.vote);
 
-
-        // const userRef = database.ref('Luis/age');
-
-        // userRef.transaction((currentAge) => {
-        //   if (currentAge === null) {
-        //     return 1; // Si age no existe, inicializarlo a 1
-        //   }
-        //   return currentAge + 1;
-        // }, (error, committed, snapshot) => {
-        //   if (error) {
-        //     console.log('Transaction failed: ', error);
-        //   } else if (!committed) {
-        //     console.log('Transaction not committed.');
-        //   } else {
-        //     console.log('Transaction committed: ', snapshot.val());
-        //   }
-        // });
-
         return NextResponse.json(true);
     }
     catch (error) {
