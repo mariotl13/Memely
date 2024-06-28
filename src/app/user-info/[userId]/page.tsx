@@ -25,16 +25,21 @@ export default function UserInfo({ params }:any) {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const response = MemeApiService.get(`http://localhost:3000/api/user-info/${params.userId}`);
-        response.then((data: UserData) => {
-            data.memes = Object.keys(data.memes).map((key: string) => ({
-                ...data.memes[key as any],
-                id: key,
-                date: new Date(key)
-            }));
-            setUser(data);
-            setIsLoading(false);
-        })
+        const response = MemeApiService.get(`http://localhost:3000/api/closed-votation`);
+        response.then((closedVotation: boolean) => {
+
+            const response = MemeApiService.get(`http://localhost:3000/api/user-info/${params.userId}`);
+            response.then((data: UserData) => {
+                data.memes = Object.keys(data.memes).map((key: string) => ({
+                    ...data.memes[key as any],
+                    id: key,
+                    date: new Date(key)
+                }));
+                if(!closedVotation) data.memes.pop();
+                setUser(data);
+                setIsLoading(false);
+            });
+        });
     }, []);
 
     return (
@@ -44,7 +49,7 @@ export default function UserInfo({ params }:any) {
                 <h2 className="user-header">{user?.name} - {user?.points} puntos</h2>
                 <h3>Memes anteriores</h3>
                 <div className="memes-container">
-                    {user?.memes.map(meme => {
+                    {user?.memes.reverse().map(meme => {
                         return <div key={meme.id} className="meme">
                             <h3>{Intl.DateTimeFormat('es-ES').format(meme?.date)}</h3>
                             <img src={meme?.url} alt={'Meme del día'+ meme?.id} />

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./meme-generator.scss";
 import MemeApiService from "@/shared/services/MemeApi.service";
 import Spinner from "@/shared/components/spinner/spinner";
+import { getDateId } from "@/shared/utils/date";
 
 
 export interface MemesData {
@@ -30,14 +31,12 @@ export default function MemeGenerator() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        // TODO: poner id del usuario logeado
-        const USER_ID = 'Vcqap82uXcNz6pJHTTlvtKYZ99i2';
-
-        MemeApiService.get(`http://localhost:3000/api/meme-generator/${USER_ID}`).then((data: any) => {
-            if (data.memeGenerated) setMemeGenerated(data.memeGenerated);
-            setMeme(data.memeTemplate);
+        const response = MemeApiService.get("https://api.imgflip.com/get_memes");
+        response.then((memes: MemesData) => {
+            const randomIndex = Math.floor(Math.random() * memes.data.memes.length);
+            setMeme(memes.data.memes[randomIndex]);
             setIsLoading(false);
-        });
+        } )
     }, []);
 
     const handleSubmit = (e: any) => {
@@ -77,7 +76,9 @@ export default function MemeGenerator() {
             // TODO: poner id del usuario logeado
             const USER_ID = 'Vcqap82uXcNz6pJHTTlvtKYZ99i2';
 
-            MemeApiService.post(`http://localhost:3000/api/meme-generator/${USER_ID}`, newMeme, true).then(() => {
+            const memeId = getDateId(new Date());
+
+            MemeApiService.post(`http://localhost:3000/api/meme-generator/${USER_ID}/${memeId}`, newMeme, true).then(() => {
                 setMemeGenerated(data.data.url);
                 setIsLoading(false);
             });
@@ -117,7 +118,7 @@ export default function MemeGenerator() {
                     </div>
                     <input type="color" name="outsideColor" />
                 </div> */}
-                <button type="submit" disabled={isLoading} className="submit-button">Generar meme</button>
+                <button type="submit" disabled={isLoading}>Generar meme</button>
             </form>
         </div>
     )
