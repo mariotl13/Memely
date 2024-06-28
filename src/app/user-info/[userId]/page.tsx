@@ -4,6 +4,7 @@ import MemeApiService from "@/shared/services/MemeApi.service";
 import { useEffect, useState } from "react";
 import './user-info.scss';
 import Spinner from "@/shared/components/spinner/spinner";
+import { Winners } from "@/app/api/ranking/today/route";
 
 
 export interface UserData {
@@ -25,8 +26,8 @@ export default function UserInfo({ params }:any) {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const response = MemeApiService.get(`http://localhost:3000/api/closed-votation`);
-        response.then((closedVotation: boolean) => {
+        const response = MemeApiService.get(`http://localhost:3000/api/ranking/today`);
+        response.then((winners: Winners) => {
 
             const response = MemeApiService.get(`http://localhost:3000/api/user-info/${params.userId}`);
             response.then((data: UserData) => {
@@ -35,7 +36,7 @@ export default function UserInfo({ params }:any) {
                     id: key,
                     date: new Date(key)
                 }));
-                if(!closedVotation) data.memes.pop();
+                if(!winners) data.memes.pop();
                 setUser(data);
                 setIsLoading(false);
             });

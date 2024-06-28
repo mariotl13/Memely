@@ -56,7 +56,7 @@ export default function Admin() {
 
         MemeApiService.post(`http://localhost:3000/api/admin`, adminInfo, true).then(() => {
             if (currentState === "voting" && adminInfo?.status === "closed") {
-                MemeApiService.post(`http://localhost:3000/api/ranking`).then(() => {
+                MemeApiService.post(`http://localhost:3000/api/ranking/today`).then(() => {
                     setisLoading(false);
                 });
             } else {
