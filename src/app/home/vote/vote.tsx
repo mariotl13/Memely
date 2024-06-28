@@ -54,7 +54,7 @@ export default function Vote() {
                 <>
                     <h1>
                         {currentIndexMeme === memes?.length ? 'Ya has votado a todos tus compañeros ' : 'Vota los memes de tus compañeros '}
-                        ({currentIndexMeme}/{memes?.length})
+                        {memes?.length ? <>({currentIndexMeme}/{memes?.length})</> : ''}
                     </h1>
 
                     {currentIndexMeme !== memes?.length &&
@@ -67,7 +67,7 @@ export default function Vote() {
                                     </button>
                                 )}
                             </div>
-                            <button onClick={() => handleOnClickConfirmVote(memes?.[currentIndexMeme]?.userId as string)} className="confirm-button" disabled={currentVote === undefined}>Votar</button>
+                            <button onClick={() => handleOnClickConfirmVote(memes?.[currentIndexMeme]?.userId as string)} className="submit-button" disabled={currentVote === undefined}>Votar</button>
                         </>
                     }
                 </>
