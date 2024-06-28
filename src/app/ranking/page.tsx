@@ -25,6 +25,9 @@ export default function Vote() {
             setRanking(data);
             setisLoading(false);
         })
+        .catch((error) => {
+            console.log(error);
+        });
     }, []);
 
     return (

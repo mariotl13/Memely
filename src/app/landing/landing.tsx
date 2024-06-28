@@ -4,6 +4,7 @@ import Tabs, { TabsConfig } from "@/shared/components/tabs/tabs";
 import "./landing.scss"
 import signUp from "@/firebase/auth/signUp";
 import { useRouter } from "next/navigation";
+import signIn from "@/firebase/auth/signIn";
 
 export default function Landing({
     inter,
@@ -36,6 +37,7 @@ export default function Landing({
             <body className={inter.className}>
                 <header>
                     <button onClick={clientSignUp}>Crear usuario de prueba</button>
+                    <button onClick={clientSignIn}>Iniciar sesión</button>
                     <Tabs tabsConfig={tabsConfig}></Tabs>
                 </header>
                 <main>
@@ -44,6 +46,19 @@ export default function Landing({
             </body>
         </html>
     )
+
+    async function clientSignIn() {
+        const email = "sartero@deloitte.es";
+        const password = "123456";
+        const { result, error } = await signIn(email, password);
+
+        if (error) {
+            return console.error(error)
+        }
+
+        console.log(result)
+        return router.push("/home")
+    }
 
     async function clientSignUp() {
         const email = "prueba@gmail.com";
