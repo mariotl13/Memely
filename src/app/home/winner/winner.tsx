@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import './winner.scss';
 import Confetti from 'react-confetti';
 import MemeApiService from '@/shared/services/MemeApi.service';
-import { Winners } from '@/app/api/ranking/today/route';
 import Spinner from '@/shared/components/spinner/spinner';
+import { Winners } from '@/shared/utils/points';
 
 
 export default function Winner() {

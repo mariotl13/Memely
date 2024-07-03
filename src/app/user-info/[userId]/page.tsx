@@ -4,7 +4,7 @@ import MemeApiService from "@/shared/services/MemeApi.service";
 import { useEffect, useState } from "react";
 import './user-info.scss';
 import Spinner from "@/shared/components/spinner/spinner";
-import { Winners } from "@/app/api/ranking/today/route";
+import { Winners } from "@/shared/utils/points";
 
 
 export interface UserData {

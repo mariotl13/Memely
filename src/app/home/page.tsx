@@ -6,8 +6,8 @@ import { AdminInfo, StatusType } from "../admin/page";
 import MemeGenerator from "./meme-generator/meme-generator";
 import Vote from "./vote/vote";
 import Winner from "./winner/winner";
-import { Winners } from "../api/ranking/today/route";
 import Spinner from "@/shared/components/spinner/spinner";
+import { Winners } from "@/shared/utils/points";
 
 export default function Home() {
 

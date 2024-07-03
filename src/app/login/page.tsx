@@ -1,8 +1,4 @@
-export default function Landing({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function Landing() {
 
 
     return (
