@@ -18,7 +18,7 @@ export default function Winner() {
     const [isLoading, setisLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const response = MemeApiService.get('http://localhost:3000/api/ranking/today');
+        const response = MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking/today`);
         response.then((winners: Winners) => {
             const values = Object.values(winners);
             // Ordenar el array en función de los valores de points, de mayor a menor

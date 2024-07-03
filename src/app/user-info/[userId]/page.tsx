@@ -26,10 +26,10 @@ export default function UserInfo({ params }:any) {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const response = MemeApiService.get(`http://localhost:3000/api/ranking/today`);
+        const response = MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking/today`);
         response.then((winners: Winners) => {
 
-            const response = MemeApiService.get(`http://localhost:3000/api/user-info/${params.userId}`);
+            const response = MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/user-info/${params.userId}`);
             response.then((data: UserData) => {
                 data.memes = Object.keys(data.memes).map((key: string) => ({
                     ...data.memes[key as any],

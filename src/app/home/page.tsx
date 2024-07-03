@@ -17,12 +17,12 @@ export default function Home() {
 
 
     useEffect(() => {
-        const response = MemeApiService.get('http://localhost:3000/api/admin');
+        const response = MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/admin`);
         response.then((data: AdminInfo) => {
             setInfo(data);
 
             if (data.status === 'closed') {
-                MemeApiService.get(`http://localhost:3000/api/ranking/today`).then((winners: Winners) => {
+                MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking/today`).then((winners: Winners) => {
                     setWinners(winners);
                     setisLoading(false);
                 });

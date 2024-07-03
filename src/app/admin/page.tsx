@@ -21,7 +21,7 @@ export default function Admin() {
     const [isLoading, setisLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const response = MemeApiService.get("http://localhost:3000/api/admin");
+        const response = MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/admin`);
         response.then((data: AdminInfo) => {
             setAdminInfo(data);
             setCurrentState(data.status);
@@ -54,9 +54,9 @@ export default function Admin() {
 
         setisLoading(true);
 
-        MemeApiService.post(`http://localhost:3000/api/admin`, adminInfo, true).then(() => {
+        MemeApiService.post(`${process.env.NEXT_PUBLIC_API_URL}/admin`, adminInfo, true).then(() => {
             if (currentState === "voting" && adminInfo?.status === "closed") {
-                MemeApiService.post(`http://localhost:3000/api/ranking/today`).then(() => {
+                MemeApiService.post(`${process.env.NEXT_PUBLIC_API_URL}/ranking/today`).then(() => {
                     setisLoading(false);
                 });
             } else {

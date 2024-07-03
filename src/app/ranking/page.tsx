@@ -20,7 +20,7 @@ export default function Vote() {
     const [isLoading, setisLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const response = MemeApiService.get("http://localhost:3000/api/ranking");
+        const response = MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking`);
         response.then((data: any) => {
             setRanking(data);
             setisLoading(false);

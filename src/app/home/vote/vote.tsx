@@ -21,7 +21,7 @@ export default function Vote() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const response = MemeApiService.get(`http://localhost:3000/api/vote/${USER_ID}`);
+        const response = MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/vote/${USER_ID}`);
         response.then((memesArray) => {
             setMemes(memesArray);
             setIsLoading(false);
@@ -40,7 +40,7 @@ export default function Vote() {
             vote: currentVote
         }
 
-        MemeApiService.post(`http://localhost:3000/api/vote/${USER_ID}`, vote, true).then(() => {
+        MemeApiService.post(`${process.env.NEXT_PUBLIC_API_URL}/vote/${USER_ID}`, vote, true).then(() => {
             setCurrentVote(undefined);
             setCurrentIndexMeme(currentIndexMeme + 1);
             setIsLoading(false);
