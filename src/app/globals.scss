@@ -11,12 +11,13 @@ html {
     color: var(--text);
 }
 
-.submit-button {
+.submit-button,
+.sign-out-button {
+    height: 47px;
     padding: 16px;
     border-radius: 4px;
 
     border: none;
-    background-color: mediumseagreen;
     color: white;
 
     cursor: pointer;
@@ -29,4 +30,12 @@ html {
     &:hover:not(:disabled) {
         opacity: 0.8;
     }
+}
+
+.submit-button {
+    background-color: mediumseagreen;
+}
+
+.sign-out-button {
+    background-color: #7D0D0D;
 }

@@ -1,0 +1,40 @@
+.login-container {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    gap: 32px;
+
+    .login {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        h3 {
+            text-align: center;
+        }
+
+        .login-error {
+            color: red;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            label {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 16px;
+                width: 100%;
+
+                input {
+                    border: none;
+                    padding: 8px;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+}

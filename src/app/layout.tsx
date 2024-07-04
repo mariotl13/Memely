@@ -6,7 +6,7 @@ import Landing from "./landing/landing";
 const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Vigilant Potato",
+    title: "Meme.ly",
     description: "There is a meme for everything, and if not, you will create it.",
 };
 

@@ -2,9 +2,15 @@
 
 import Tabs, { TabsConfig } from "@/shared/components/tabs/tabs";
 import "./landing.scss"
-import signUp from "@/firebase/auth/signUp";
 import { useRouter } from "next/navigation";
-import signIn from "@/firebase/auth/signIn";
+import { createContext, useEffect, useState } from "react";
+import { User, getAuth } from "firebase/auth";
+import { firebase_app } from "@/firebase/config";
+import signOutUser from "@/firebase/auth/signOut";
+
+
+export const UserContext = createContext<User | null>(null)
+
 
 export default function Landing({
     inter,
@@ -13,6 +19,8 @@ export default function Landing({
     inter: any;
     children: React.ReactNode;
 }>) {
+
+    const [user, setUser] = useState<User | null>(null);
 
     const router = useRouter();
 
@@ -25,51 +33,54 @@ export default function Landing({
             label: 'Ranking',
             url: '/ranking'
         },
-        // TODO: user has role === 'admin'
-        ...(true ? [{
+        ...(user?.email === 'mtapialopez@deloitte.es' ? [{
             label: 'Admin',
             url: '/admin'
         }] : [])
     ]
 
+    useEffect(() => {
+        const auth = getAuth(firebase_app);
+        auth.onAuthStateChanged(async (user) => {
+            setUser(user);
+            if (!user) router.push("/login")
+        });
+    }, [])
+
+    async function clientSignOut() {
+        const { result, error } = await signOutUser();
+
+        if (error) {
+            return console.error(error)
+        }
+
+        console.log(result)
+        return router.push("/login")
+    }
+
+    const redirectToLogin = () => {
+        router.push("/login")
+    }
+
     return (
         <html lang="en">
             <body className={inter.className}>
-                <header>
-                    <button onClick={clientSignUp}>Crear usuario de prueba</button>
-                    <button onClick={clientSignIn}>Iniciar sesión</button>
-                    <Tabs tabsConfig={tabsConfig}></Tabs>
-                </header>
+                {user &&
+                    <header>
+                        <Tabs tabsConfig={tabsConfig}></Tabs>
+                        {user &&
+                            <div style={{display: 'flex', gap: 12, alignItems: 'center'}}>
+                                <h4 style={{marginRight: 16}}>Bienvenid@, {user?.email}</h4>
+                                <button onClick={clientSignOut} className="sign-out-button">Cerrar sesión</button>
+                            </div>}
+                    </header>
+                }
                 <main>
-                    {children}
+                    <UserContext.Provider value={user}>
+                        {children}
+                    </UserContext.Provider>
                 </main>
             </body>
         </html>
     )
-
-    async function clientSignIn() {
-        const email = "sartero@deloitte.es";
-        const password = "123456";
-        const { result, error } = await signIn(email, password);
-
-        if (error) {
-            return console.error(error)
-        }
-
-        console.log(result)
-        return router.push("/home")
-    }
-
-    async function clientSignUp() {
-        const email = "prueba@gmail.com";
-        const password = "prueba123";
-        const { result, error } = await signUp(email, password);
-
-        if (error) {
-            return console.error(error)
-        }
-
-        console.log(result)
-        return router.push("/meme-generator")
-    }
 }
