@@ -1,15 +1,14 @@
 "use client";
 
 import MemeApiService from "@/shared/services/MemeApi.service";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import './vote.scss';
 import Spinner from "@/shared/components/spinner/spinner";
+import { UserContext } from "@/app/landing/landing";
 
 
 export default function Vote() {
-
-    // TODO: poner id del usuario logeado
-    const USER_ID = 'Vcqap82uXcNz6pJHTTlvtKYZ99i2';
+    const user = useContext(UserContext);
 
     const [memes, setMemes] = useState<{
         userId: string;
@@ -21,12 +20,16 @@ export default function Vote() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const response = MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/vote/${USER_ID}`);
-        response.then((memesArray) => {
-            setMemes(memesArray);
-            setIsLoading(false);
-        })
-    }, []);
+        console.log('holaaaaaa', user);
+        if (user) {
+            const USER_ID = user.uid;
+            const response = MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/vote/${USER_ID}`);
+            response.then((memesArray) => {
+                setMemes(memesArray);
+                setIsLoading(false);
+            })
+        }
+    }, [user]);
 
     const handleOnClickGrade = (vote: number) => {
         setCurrentVote(vote);
@@ -40,6 +43,7 @@ export default function Vote() {
             vote: currentVote
         }
 
+        const USER_ID = user?.uid;
         MemeApiService.post(`${process.env.NEXT_PUBLIC_API_URL}/vote/${USER_ID}`, vote, true).then(() => {
             setCurrentVote(undefined);
             setCurrentIndexMeme(currentIndexMeme + 1);

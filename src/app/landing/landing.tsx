@@ -58,10 +58,6 @@ export default function Landing({
         return router.push("/login")
     }
 
-    const redirectToLogin = () => {
-        router.push("/login")
-    }
-
     return (
         <html lang="en">
             <body className={inter.className}>

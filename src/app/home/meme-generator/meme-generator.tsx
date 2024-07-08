@@ -1,9 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./meme-generator.scss";
 import MemeApiService from "@/shared/services/MemeApi.service";
 import Spinner from "@/shared/components/spinner/spinner";
+import { UserContext } from "@/app/landing/landing";
 
 
 export interface MemesData {
@@ -29,16 +30,19 @@ export default function MemeGenerator() {
     const [memeGenerated, setMemeGenerated] = useState<string>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    useEffect(() => {
-        // TODO: poner id del usuario logeado
-        const USER_ID = 'Vcqap82uXcNz6pJHTTlvtKYZ99i2';
+    const user = useContext(UserContext);
 
-        MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/meme-generator/${USER_ID}`).then((data: any) => {
-            if (data.memeGenerated) setMemeGenerated(data.memeGenerated);
-            setMeme(data.memeTemplate);
-            setIsLoading(false);
-        });
-    }, []);
+    useEffect(() => {
+        if (user) {
+            const USER_ID = user.uid;
+            console.log('userrr', user);
+            MemeApiService.get(`${process.env.NEXT_PUBLIC_API_URL}/meme-generator/${USER_ID}`).then((data: any) => {
+                if (data.memeGenerated) setMemeGenerated(data.memeGenerated);
+                setMeme(data.memeTemplate);
+                setIsLoading(false);
+            });
+        }
+    }, [user]);
 
     const handleSubmit = (e: any) => {
         setIsLoading(true);
@@ -74,8 +78,7 @@ export default function MemeGenerator() {
                 url: data.data.url
             };
 
-            // TODO: poner id del usuario logeado
-            const USER_ID = 'Vcqap82uXcNz6pJHTTlvtKYZ99i2';
+            const USER_ID = user?.uid;
 
             MemeApiService.post(`${process.env.NEXT_PUBLIC_API_URL}/meme-generator/${USER_ID}`, newMeme, true).then(() => {
                 setMemeGenerated(data.data.url);
@@ -99,7 +102,7 @@ export default function MemeGenerator() {
                     Array.from({ length: meme?.box_count ?? 0 }, (_, i) =>
                         <label key={i}>
                             Caption {i + 1}
-                            <input name={"caption" + i} />
+                            <input name={"caption" + i} type="text" required />
                         </label>
                     )
                 }
