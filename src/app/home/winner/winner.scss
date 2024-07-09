@@ -10,18 +10,79 @@
         align-items: center;
         gap: 8px;
 
-        img {
-            &.points-3 {
-                width: 400px;
-            }
+        position: relative;
 
-            &.points-2 {
-                width: 300px;
-            }
+        &::after {
+            color: white;
+            padding: 5px 10px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
 
-            &.points-1 {
-                width: 200px;
+        &.points-3 {
+            width: 400px;
+            box-shadow: 0 0 10px #FFD700;
+            border: 2px solid #FFD700;
+
+            &::after {
+                content: "3 puntos";
+                background-color: #FFD700;
             }
         }
+
+        &.points-2 {
+            width: 325px;
+            box-shadow: 0 0 10px #C0C0C0;
+            border: 2px solid #C0C0C0;
+
+            &::after {
+                content: "2 puntos";
+                background-color: #C0C0C0;
+            }
+        }
+
+        &.points-1 {
+            width: 250px;
+            box-shadow: 0 0 10px #CD7F32;
+            border: 2px solid #CD7F32;
+
+            &::after {
+                content: "1 punto";
+                background-color: #CD7F32;
+            }
+        }
+
+        h3 {
+            margin-top: 64px;
+            text-align: center;
+        }
+
+        img {
+            width: inherit;
+        }
     }
+}
+
+.primera-posicion {
+    border: 5px solid #FFD700;
+    position: relative;
+}
+
+.primera-posicion::after {
+    content: "1º Lugar";
+    color: white;
+    background-color: #FFD700;
+    padding: 5px 10px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.primera-posicion img {
+    box-shadow: 0 0 10px #FFD700;
 }

@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import './winner.scss';
-import Confetti from 'react-confetti';
 import MemeApiService from '@/shared/services/MemeApi.service';
 import Spinner from '@/shared/components/spinner/spinner';
 import { Winners } from '@/shared/utils/points';
-
+import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 
 export default function Winner() {
 
@@ -33,12 +32,12 @@ export default function Winner() {
         <>
             {isLoading ? <Spinner></Spinner> :
             <>
-                <Confetti recycle={false}/>
+                <Fireworks autorun={{ speed: 3, duration: 3000 }} />
                 <div className='winners-container'>
                     {winners?.map(winner => {
-                        return <div key={winner.name} className='winner'>
-                            <h3>{winner.name} - {winner.points} puntos</h3>
-                            <img src={winner.memeUrl} alt="Meme ganador" className={'points-'+winner.points}/>
+                        return <div key={winner.name}className={'winner points-'+winner.points}>
+                            <h3>{winner.name}</h3>
+                            <img src={winner.memeUrl} alt="Meme ganador"/>
                         </div>
                     })}
                 </div>

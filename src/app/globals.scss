@@ -26,16 +26,20 @@ html {
         opacity: 0.3;
         cursor: not-allowed;
     }
-
-    &:hover:not(:disabled) {
-        opacity: 0.8;
-    }
 }
 
 .submit-button {
-    background-color: mediumseagreen;
+    background-color: #3C6E47;
+
+    &:hover:not(:disabled) {
+        background-color: #2B5034;
+    }
 }
 
 .sign-out-button {
-    background-color: #7D0D0D;
+    background-color: #D9534F;
+
+    &:hover:not(:disabled) {
+        background-color: #C9302C;
+    }
 }
