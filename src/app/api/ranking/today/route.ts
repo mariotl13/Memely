@@ -32,7 +32,7 @@ export async function POST() {
                 await transaction(`users/${usuario}/points`, (currentPoints: number) => currentPoints + todayRank[usuario]);
                 await setData(`winners/${memeId}/${usuario}`, {
                     points: todayRank[usuario],
-                    name: `${users[usuario].name} (${users[usuario].mail})`,
+                    name: `${users[usuario].name}`,
                     memeUrl: users[usuario].memes[memeId].url
                 });
             }

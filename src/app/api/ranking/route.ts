@@ -10,7 +10,6 @@ export async function GET() {
             const usersArray = Object.keys(data).map((key) => ({
                 id: key,
                 name: data[key].name,
-                mail: data[key].mail,
                 points: data[key].points
             }));
             return NextResponse.json(usersArray);

@@ -10,7 +10,6 @@ import Link from "next/link";
 export interface Ranking {
     id: string;
     name: string;
-    mail: string;
     points: number;
 }
 
@@ -43,7 +42,7 @@ export default function Vote() {
                     <tbody>
                         {...ranking?.sort((a, b) => b.points - a.points).map(rank =>
                             <tr key={rank.id}>
-                                <td><Link href={"/user-info/"+rank.id}>{rank.name} ({rank.mail})</Link></td>
+                                <td><Link href={"/user-info/"+rank.id}>{rank.name}</Link></td>
                                 <td>{rank.points}</td>
                             </tr>
                         )}
