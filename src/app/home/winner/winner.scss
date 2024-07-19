@@ -66,23 +66,8 @@
     }
 }
 
-.primera-posicion {
-    border: 5px solid #FFD700;
-    position: relative;
-}
-
-.primera-posicion::after {
-    content: "1º Lugar";
-    color: white;
-    background-color: #FFD700;
-    padding: 5px 10px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
-.primera-posicion img {
-    box-shadow: 0 0 10px #FFD700;
+@media (max-width: 800px) {
+    .winners-container .winner {
+        width: 100% !important;
+    }
 }
