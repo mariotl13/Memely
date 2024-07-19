@@ -43,3 +43,13 @@
         }
     }
 }
+
+@media (max-width: 800px) {
+    .meme-container {
+        flex-direction: column;
+
+        img {
+            width: 100%;
+        }
+    }
+}

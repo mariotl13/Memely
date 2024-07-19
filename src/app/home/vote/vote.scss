@@ -9,6 +9,7 @@
 
     .vote-buttons {
         display: flex;
+        flex-wrap: wrap;
         gap: 4px;
 
         margin: 16px 0px;
@@ -26,6 +27,16 @@
                 background-color: #3C6E47;
                 color: white;
             }
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .votes-container {
+        width: 100%;
+
+        img {
+            width: 100%;
         }
     }
 }

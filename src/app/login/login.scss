@@ -38,3 +38,10 @@
         }
     }
 }
+
+@media (max-width: 800px) {
+    .login-container {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+}

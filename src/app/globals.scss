@@ -21,6 +21,7 @@ html {
     color: white;
 
     cursor: pointer;
+    text-wrap: nowrap;
 
     &:disabled {
         opacity: 0.3;
