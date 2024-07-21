@@ -1,0 +1,34 @@
+.history-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 80%;
+
+    .memes-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit,
+                minmax(300px,
+                    1fr));
+        gap: 1rem;
+        width: 100%;
+
+        .meme {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            box-shadow: 0 0 10px black;
+
+            h3 {
+                text-align: center;
+            }
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .history-container {
+        width: 100%;
+    }
+}
