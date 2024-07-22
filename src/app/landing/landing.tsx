@@ -50,7 +50,7 @@ export default function Landing({
 			setUser(user);
 			if (!user) router.push("/login");
 		});
-	}, []);
+	}, [router]);
 
 	async function clientSignOut() {
 		const { result, error } = await signOutUser();

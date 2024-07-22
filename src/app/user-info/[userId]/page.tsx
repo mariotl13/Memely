@@ -37,7 +37,7 @@ export default function UserInfo({ params }: any) {
 			setUser(data);
 			setIsLoading(false);
 		});
-	}, []);
+	}, [params.userId]);
 
 	return (
 		<>
