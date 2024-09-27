@@ -40,8 +40,10 @@ export default function History() {
 				return {
 					userName: userValue.name,
 					url: userValue?.["memes"]?.[selectedDate]?.url,
+					points: userValue?.["memes"]?.[selectedDate]?.points,
 				};
-			});
+			})
+			.sort((a, b) => b.points - a.points);
 	}
 
 	return (
@@ -69,7 +71,10 @@ export default function History() {
 												key={meme.userName}
 												className="meme"
 											>
-												<h3>{meme.userName}</h3>
+												<h3>
+													{meme.userName} -{" "}
+													{meme.points} points
+												</h3>
 												<img
 													src={meme.url}
 													alt={
