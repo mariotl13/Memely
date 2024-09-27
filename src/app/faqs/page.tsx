@@ -9,7 +9,7 @@ export default function Faqs() {
 				Memely es una aplicación ideada con el objetivo de procrastinar
 				lo máximo posible.
 			</h2>
-			<h1>¿En que consiste?</h1>
+			<h1>¿En qué consiste?</h1>
 			<h2>
 				El objetivo es hacer un concurso de memes todos los viernes, en
 				el cual tendrás que crear tu meme y votar los de tus compañeros.
@@ -19,6 +19,13 @@ export default function Faqs() {
 				Cada viernes aparecerá en la home una plantilla de meme
 				aleatoria (la misma para todos los usuarios) y tendrás que
 				rellenar los campos de texto para generar tu meme.
+			</h2>
+			<h1>¿Cuántos memes puedo generar?</h1>
+			<h2>
+				Puedes generar tu meme todas las veces que quieras hasta las
+				12:30, pero ten en cuenta que cada vez que generas uno el
+				anterior se eliminará. El último que hayas generado será con el
+				que participes en el concurso.
 			</h2>
 			<h1>¿Cuáles son los horarios?</h1>
 			<h2>
@@ -34,8 +41,8 @@ export default function Faqs() {
 				Consultar ganadores: <strong>a partir de las 14:00.</strong>
 			</h2>
 			<h1>
-				He accedido a partir de las 12:30 pero no me aparecen las
-				votaciones.
+				He accedido en esos horarios, pero no veo el meme/ las
+				votaciones / los ganadores.
 			</h1>
 			<h2>
 				Todos los cambios en la app de generar la plantilla, comenzar la
@@ -49,14 +56,23 @@ export default function Faqs() {
 				puntuación desde el 0 (ni puta gracia) hasta el 10 (risa
 				incontenible).
 			</h2>
-			<h1>¿Cómo se sabe quien ha ganado?</h1>
+			<h1>¿Cuántos puntos reciben los ganadores?</h1>
 			<h2>
-				Vuelve a acceder a la web a partir de las 14:00 para saber cual
-				ha sido el top 3 de memes y ver el ranking actualizado.
+				El top 3 de memes se calcula en función de los votos del resto
+				de participantes. El meme con más votos recibirá 3 puntos, el
+				segundo con más votos recibirá 2 puntos, y el tercero 1 punto.
+				El resto de memes no reciben ningún punto.
+			</h2>
+			<h1>¿Qué pasa si hay un empate entre varios memes?</h1>
+			<h2>
+				Si hay varios memes empatados en cualquier posición, todos ellos
+				recibirán los puntos de esa posición. Es decir, si hay por
+				ejemplo dos que han quedado segundos, habrá un meme con 3
+				puntos, otros dos con 2 puntos y otro con 1 punto.
 			</h2>
 			<h1>¿Es necesario que vote el resto de memes?</h1>
 			<h2>
-				¡SÍ!. Si has creado tu meme pero no participas en la votación,
+				¡SÍ! Si has creado tu meme pero no participas en la votación,
 				recibirás una penalización, por lo que será más difícil que
 				ganes.
 			</h2>
@@ -67,20 +83,6 @@ export default function Faqs() {
 			<h2>
 				Sí, aunque no hayas creado ninguno puedes votar igualmente para
 				ayudar a elegir el ganador.
-			</h2>
-			<h1>¿Cuantos puntos reciben los ganadores?</h1>
-			<h2>
-				El top 3 de memes se calcula en función de los votos del resto
-				de participantes. El meme con más votos recibirá 3 puntos, el
-				segundo con más votos recibirá 2 puntos, y el tercero 1 punto.
-				El resto de memes no reciben ningún punto.
-			</h2>
-			<h1>¿Cuantos memes puedo generar?</h1>
-			<h2>
-				Puedes generar tu meme todas las veces que quieras hasta las
-				12:30, pero ten en cuenta que cada vez que generas uno el
-				anterior se eliminará. El último que hayas generado será con el
-				que participes en el concurso.
 			</h2>
 			<h1>¿Cómo sé si mi meme se ha generado correctamente?</h1>
 			<h2>
