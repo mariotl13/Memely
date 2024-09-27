@@ -34,6 +34,10 @@ export default function Landing({
 			label: "Historial",
 			url: "/history",
 		},
+		{
+			label: "Faqs",
+			url: "/faqs",
+		},
 		...(user?.email === "mtapialopez@deloitte.es"
 			? [
 					{

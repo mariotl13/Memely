@@ -105,7 +105,12 @@ export default function MemeGenerator() {
 				{Array.from({ length: meme?.box_count ?? 0 }, (_, i) => (
 					<label key={i}>
 						Caption {i + 1}
-						<input name={"caption" + i} type="text" required />
+						<input
+							name={"caption" + i}
+							type="text"
+							required
+							autoComplete="off"
+						/>
 					</label>
 				))}
 				{/* <div className="color-container">
