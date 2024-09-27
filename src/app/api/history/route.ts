@@ -8,11 +8,12 @@ export async function GET() {
         const users = await getData('users');
 
         const winners = await getData('winners');
+        const votes = await getData('votes');
 
         const dateId = getDateId(new Date());
         if (templates[dateId] && !winners[dateId]) delete templates[dateId];
 
-        return NextResponse.json({ templates, users });
+        return NextResponse.json({ templates, users, votes });
     }
     catch (error) {
         console.error("Error getting templates:", error);

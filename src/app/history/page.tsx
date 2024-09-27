@@ -12,7 +12,8 @@ export default function History() {
 	const [historyData, setHistoryData] = useState<{
 		templates: { [key: string]: any };
 		users: { [key: string]: any };
-	}>({ templates: {}, users: {} });
+		votes: { [key: string]: any };
+	}>({ templates: {}, users: {}, votes: {} });
 	const [selectedDate, setSelectedDate] = useState("");
 
 	useEffect(() => {
@@ -37,11 +38,15 @@ export default function History() {
 			.filter((user) => historyData.users[user]["memes"]?.[selectedDate])
 			.map((user) => {
 				const userValue = historyData.users[user];
-				return {
+				const newMeme = {
 					userName: userValue.name,
 					url: userValue?.["memes"]?.[selectedDate]?.url,
 					points: userValue?.["memes"]?.[selectedDate]?.points,
 				};
+				if (!historyData.votes?.[selectedDate][user]) {
+					newMeme.points -= 8;
+				}
+				return newMeme;
 			})
 			.sort((a, b) => b.points - a.points);
 	}
