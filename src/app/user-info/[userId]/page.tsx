@@ -52,6 +52,8 @@ export default function UserInfo({ params }: any) {
 					{user?.memes && (
 						<div className="memes-container">
 							{user?.memes.reverse().map((meme) => {
+								console.log("a ver", meme, meme.date);
+
 								return (
 									<div key={meme.id} className="meme">
 										<h3>
