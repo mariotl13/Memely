@@ -38,6 +38,7 @@ export default function Admin() {
 	};
 
 	const handleOnGenerateTemplate = () => {
+		setisLoading(true);
 		const response = MemeApiService.get(
 			"https://api.imgflip.com/get_memes"
 		);
@@ -45,9 +46,32 @@ export default function Admin() {
 			const randomIndex = Math.floor(
 				Math.random() * memes.data.memes.length
 			);
-			setAdminInfo({
-				status: adminInfo?.status as StatusType,
-				meme: memes.data.memes[randomIndex],
+			const template = memes.data.memes[randomIndex];
+
+			// Fake texts in templates
+			let body: any = {
+				template_id: template.id,
+				username: "MarioTL13",
+				password: "vigilantPotato",
+			};
+
+			for (let index = 0; index < template.box_count; index++) {
+				body = {
+					...body,
+					[`boxes[${index}][text]`]: `Caption ${index + 1}`,
+				};
+			}
+
+			MemeApiService.post(
+				"https://api.imgflip.com/caption_image",
+				body
+			).then((data) => {
+				template.url = data.data.url;
+				setAdminInfo({
+					status: adminInfo?.status as StatusType,
+					meme: template,
+				});
+				setisLoading(false);
 			});
 		});
 	};

@@ -64,8 +64,8 @@ export default function MemeGenerator() {
 		values.forEach((caption, index) => {
 			body = {
 				...body,
-				[`boxes[${index}][text]`]: caption,
-				// [`boxes[${index}][color]`]: color
+				[`boxes[${index}][text]`]:
+					caption.toString().length > 0 ? caption : " ",
 			};
 		});
 
@@ -108,7 +108,6 @@ export default function MemeGenerator() {
 						<input
 							name={"caption" + i}
 							type="text"
-							required
 							autoComplete="off"
 						/>
 					</label>
