@@ -19,15 +19,13 @@
             display: flex;
             flex-direction: column;
             gap: 4px;
+            height: fit-content;
+
+            box-shadow: 0 0 10px black;
 
             h3 {
                 text-align: center;
             }
         }
-    }
-
-    h2,
-    h3 {
-        margin: 0;
     }
 }

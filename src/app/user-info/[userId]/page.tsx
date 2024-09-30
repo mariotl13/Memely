@@ -50,7 +50,6 @@ export default function UserInfo({ params }: any) {
 					<h2 className="user-header">
 						{user?.name} - {user?.points} puntos
 					</h2>
-					<h3>Memes anteriores</h3>
 					{user?.memes && (
 						<div className="memes-container">
 							{user?.memes.map((meme) => {
