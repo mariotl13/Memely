@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { isSameDay } from "date-fns";
+import { formatDateString } from "@/shared/utils/date";
 
 const CustomDatePicker = ({
 	allowedDatesStrings,
@@ -18,7 +19,7 @@ const CustomDatePicker = ({
 
 	// Lista de fechas permitidas
 	const allowedDates = allowedDatesStrings.map(
-		(dateString) => new Date(dateString)
+		(dateString) => new Date(formatDateString(dateString))
 	);
 
 	// Función para verificar si una fecha es seleccionable

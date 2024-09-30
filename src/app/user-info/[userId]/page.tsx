@@ -34,6 +34,7 @@ export default function UserInfo({ params }: any) {
 					id: key,
 					date: new Date(formatDateString(key)),
 				}));
+				data.memes.sort((a, b) => b.date.getTime() - a.date.getTime());
 			}
 			setUser(data);
 			setIsLoading(false);
@@ -52,17 +53,7 @@ export default function UserInfo({ params }: any) {
 					<h3>Memes anteriores</h3>
 					{user?.memes && (
 						<div className="memes-container">
-							{user?.memes.reverse().map((meme) => {
-								console.log("a ver", meme.date.getDate());
-								console.log(
-									"a ver2",
-									new Date("2024-1-6").getDate()
-								);
-								console.log(
-									"a ver3",
-									new Date("2024-01-06").getDate()
-								);
-
+							{user?.memes.map((meme) => {
 								return (
 									<div key={meme.id} className="meme">
 										<h3>
