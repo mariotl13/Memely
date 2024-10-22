@@ -5,18 +5,26 @@ import { useContext, useEffect, useState } from "react";
 import "./vote.scss";
 import Spinner from "@/shared/components/spinner/spinner";
 import { UserContext } from "@/app/landing/landing";
+import Countdown from "@/shared/components/countdown/Countdown";
 
 export default function Vote() {
 	const user = useContext(UserContext);
 
 	const [memes, setMemes] = useState<
-		{
-			userId: string;
-			url: string;
-		}[]
+		| {
+				userId: string;
+				url: string;
+		  }[]
+		| null
 	>();
-	const [currentIndexMeme, setCurrentIndexMeme] = useState<number>(0);
-	const [currentVote, setCurrentVote] = useState<number>();
+
+	const [tops, setTops] = useState<{
+		[key: string]: any;
+	}>({
+		top1: undefined,
+		top2: undefined,
+		top3: undefined,
+	});
 
 	const [isLoading, setIsLoading] = useState(true);
 
@@ -33,26 +41,35 @@ export default function Vote() {
 		}
 	}, [user]);
 
-	const handleOnClickGrade = (vote: number) => {
-		setCurrentVote(vote);
+	const handleSetTop = (
+		topToChange: "top1" | "top2" | "top3",
+		user: string
+	) => {
+		const newTops = { ...tops };
+		Object.keys(tops)
+			.filter((key) => key !== topToChange && tops[key] === user)
+			.forEach((key) => {
+				newTops[key] = undefined;
+			});
+		newTops[topToChange] = user;
+		setTops(newTops);
 	};
 
-	const handleOnClickConfirmVote = (votedUserId: string) => {
+	const handleOnClickConfirmVotes = () => {
 		setIsLoading(true);
 
-		const vote = {
-			votedUserId,
-			vote: currentVote,
-		};
+		const votes = Object.entries(tops).map(([key, value]) => ({
+			votedUserId: value,
+			vote: key === "top1" ? 3 : key === "top2" ? 2 : 1,
+		}));
 
 		const USER_ID = user?.uid;
 		MemeApiService.post(
 			`${process.env.NEXT_PUBLIC_API_URL}/vote/${USER_ID}`,
-			vote,
+			votes,
 			true
 		).then(() => {
-			setCurrentVote(undefined);
-			setCurrentIndexMeme(currentIndexMeme + 1);
+			setMemes(null);
 			setIsLoading(false);
 		});
 	};
@@ -63,53 +80,131 @@ export default function Vote() {
 				<Spinner></Spinner>
 			) : (
 				<>
+					<Countdown limit={{ hour: 14, minutes: 0 }} />
+
 					<h1>
-						{currentIndexMeme === memes?.length
-							? "Ya has votado a todos tus compañeros "
-							: "Vota los memes de tus compañeros "}
-						{memes?.length ? (
-							<>
-								({currentIndexMeme}/{memes?.length})
-							</>
-						) : (
-							""
-						)}
+						{memes
+							? "Vota el resto de memes"
+							: "Ya has votado los memes de hoy"}
 					</h1>
 
-					{currentIndexMeme !== memes?.length && (
-						<>
-							<img
-								src={memes?.[currentIndexMeme]?.url}
-								alt="Current meme to vote"
-							/>
-							<div className="vote-buttons">
-								{Array.from({ length: 11 }, (_, i) => (
-									<button
-										key={i}
-										onClick={() => handleOnClickGrade(i)}
-										className={
-											currentVote === i
-												? "selected-vote"
-												: undefined
-										}
+					{memes && (
+						<div className="memes-container">
+							{memes.map((meme) => {
+								return (
+									<div
+										key={meme.userId}
+										className="meme-detail"
 									>
-										{i}
-									</button>
-								))}
-							</div>
-							<button
-								onClick={() =>
-									handleOnClickConfirmVote(
-										memes?.[currentIndexMeme]
-											?.userId as string
-									)
-								}
-								className="submit-button"
-								disabled={currentVote === undefined}
-							>
-								Votar
-							</button>
-						</>
+										<img
+											src={meme?.url}
+											alt="Current meme to vote"
+										/>
+
+										<div className="button-wrap">
+											<input
+												type="radio"
+												name="top1"
+												id={`${meme.userId}top1`}
+												value={meme.userId}
+												checked={
+													tops.top1 === meme.userId
+												}
+												onChange={(event) =>
+													handleSetTop(
+														"top1",
+														event.target.value
+													)
+												}
+											/>
+											<label
+												htmlFor={`${meme.userId}top1`}
+												className={
+													tops.top1 &&
+													tops.top1 !== meme.userId &&
+													"already-selected-top"
+												}
+											>
+												<img
+													src="icons/medal-gold.svg"
+													alt="Gold medal"
+												/>
+											</label>
+											<input
+												type="radio"
+												name="top2"
+												id={`${meme.userId}top2`}
+												value={meme.userId}
+												checked={
+													tops.top2 === meme.userId
+												}
+												onChange={(event) =>
+													handleSetTop(
+														"top2",
+														event.target.value
+													)
+												}
+											/>
+											<label
+												htmlFor={`${meme.userId}top2`}
+												className={
+													tops.top2 &&
+													tops.top2 !== meme.userId &&
+													"already-selected-top"
+												}
+											>
+												<img
+													src="icons/medal-silver.svg"
+													alt="Silver medal"
+												/>
+											</label>
+											<input
+												type="radio"
+												name="top3"
+												id={`${meme.userId}top3`}
+												value={meme.userId}
+												checked={
+													tops.top3 === meme.userId
+												}
+												onChange={(event) =>
+													handleSetTop(
+														"top3",
+														event.target.value
+													)
+												}
+											/>
+											<label
+												htmlFor={`${meme.userId}top3`}
+												className={
+													tops.top3 &&
+													tops.top3 !== meme.userId &&
+													"already-selected-top"
+												}
+											>
+												<img
+													src="icons/medal-bronze.svg"
+													alt="Bronze medal"
+												/>
+											</label>
+										</div>
+									</div>
+								);
+							})}
+						</div>
+					)}
+
+					{memes && (
+						<button
+							onClick={handleOnClickConfirmVotes}
+							className="submit-button"
+							disabled={
+								!Object.values(tops).every(
+									(value) => value !== undefined
+								)
+							}
+						>
+							Confirmar votos
+						</button>
 					)}
 				</>
 			)}

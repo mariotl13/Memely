@@ -1,34 +1,100 @@
+$dark: #292929;
+$light: #efefef;
+$gold: #FFD700;
+$silver: #9e9d9d;
+$bronze: #CD7F32;
+
+
 .votes-container {
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    img {
-        width: 400px;
-    }
+    .memes-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit,
+                minmax(300px,
+                    1fr));
+        gap: 1rem;
 
-    .vote-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
+        .meme-detail {
+            display: flex;
+            flex-direction: column;
 
-        margin: 16px 0px;
+            .button-wrap {
+                text-align: center;
 
-        button {
-            border-radius: 50%;
-            background-color: white;
-            border: 1px solid black;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
+                input[type="radio"] {
+                    display: none;
+                }
 
-            &:hover,
-            &.selected-vote {
-                background-color: #3C6E47;
-                color: white;
+                input[type="radio"][name="top1"]:checked+label {
+                    background: $gold;
+                    color: $light;
+
+                    &:hover {
+                        background: darken($gold, 5%);
+                        color: darken($light, 5%);
+                    }
+                }
+
+                input[type="radio"][name="top2"]:checked+label {
+                    background: $silver;
+                    color: $light;
+
+                    &:hover {
+                        background: darken($silver, 5%);
+                        color: darken($light, 5%);
+                    }
+                }
+
+                input[type="radio"][name="top3"]:checked+label {
+                    background: $bronze;
+                    color: $light;
+
+                    &:hover {
+                        background: darken($bronze, 5%);
+                        color: darken($light, 5%);
+                    }
+                }
+
+                label {
+                    display: inline-block;
+                    margin: 0.5em;
+                    cursor: pointer;
+                    color: $dark;
+                    border-radius: 0.25em;
+                    background: $light;
+                    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.22);
+                    transition: 0.3s;
+                    user-select: none;
+
+                    &:hover {
+                        background: darken($light, 10%);
+                        color: darken($dark, 10%);
+                        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.32);
+                    }
+
+                    &:active {
+                        transform: translateY(2px);
+                        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0 rgba(0, 0, 0, 0.22);
+                    }
+
+                    &.already-selected-top {
+                        opacity: .5;
+                    }
+
+                    img {
+                        width: 32px;
+                        height: 32px;
+                    }
+                }
             }
         }
     }
+
 }
 
 @media (max-width: 800px) {

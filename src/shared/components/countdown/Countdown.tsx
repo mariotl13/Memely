@@ -8,17 +8,9 @@ const Countdown = ({ limit }: { limit: { hour: number; minutes: number } }) => {
 	const [targetTime, setTargetTime] = useState<number | null>(null);
 
 	useEffect(() => {
-		// Obtener la fecha y hora actuales
-		const now = new Date();
-
 		// Crear un objeto de fecha para las 12:30 PM del día actual
 		const target = new Date();
 		target.setHours(limit.hour, limit.minutes, 0, 0); // 12:30:00 PM
-
-		// Si ya hemos pasado las 12:30 del día actual, se configura la cuenta regresiva para el siguiente día
-		if (now > target) {
-			target.setDate(target.getDate() + 1); // Suma un día
-		}
 
 		setTargetTime(target.getTime()); // Establece el tiempo objetivo en milisegundos
 	}, []);
@@ -41,6 +33,8 @@ const Countdown = ({ limit }: { limit: { hour: number; minutes: number } }) => {
 				fontSize: "16px", // Ajusta el tamaño del texto dentro de los dígitos
 			}}
 			style={{ justifyContent: "center", marginBottom: "32px" }}
+			hideOnComplete={false}
+			renderMap={[false, true, true, true]}
 		/>
 	);
 };

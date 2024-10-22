@@ -8,7 +8,6 @@ import Vote from "./vote/vote";
 import Winner from "./winner/winner";
 import Spinner from "@/shared/components/spinner/spinner";
 import { Winners } from "@/shared/utils/points";
-import Countdown from "@/shared/components/countdown/Countdown";
 
 export default function Home() {
 	const [info, setInfo] = useState<AdminInfo>();
@@ -37,11 +36,7 @@ export default function Home() {
 		switch (param) {
 			case "closed":
 				if (winners) {
-					return (
-						<>
-							<Winner></Winner>
-						</>
-					);
+					return <Winner></Winner>;
 				} else {
 					return (
 						<h3>
@@ -50,19 +45,9 @@ export default function Home() {
 					);
 				}
 			case "meming":
-				return (
-					<div>
-						<Countdown limit={{ hour: 12, minutes: 30 }} />
-						<MemeGenerator></MemeGenerator>
-					</div>
-				);
+				return <MemeGenerator></MemeGenerator>;
 			case "voting":
-				return (
-					<div>
-						<Countdown limit={{ hour: 14, minutes: 0 }} />
-						<Vote></Vote>
-					</div>
-				);
+				return <Vote></Vote>;
 		}
 	};
 

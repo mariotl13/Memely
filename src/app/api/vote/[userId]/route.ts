@@ -11,11 +11,12 @@ export async function GET(_request: NextRequest, { params }: any) {
         const users = await getData(`users`);
         const votes = await getData(`votes`);
 
-        // Guardar todos los memes que no sean los del propio usuario, y que no los haya votado ya
+        if (votes?.[dateId]?.[userId]) return NextResponse.json(null);
+
+        // Guardar todos los memes que no sean los del propio usuario
         const memesArray = Object.keys(users).filter(key =>
             key !== userId &&
-            users[key]?.memes?.[dateId]?.url &&
-            votes?.[dateId]?.[userId]?.[key] === undefined
+            users[key]?.memes?.[dateId]?.url
         ).map((key) => ({
             userId: key,
             url: users[key]?.memes?.[dateId]?.url
@@ -37,8 +38,10 @@ export async function POST(request: NextRequest, { params }: any) {
         const dateId = getDateId(new Date());
         const body = await request.json();
 
-        await setData(`votes/${dateId}/${userId}/${body.votedUserId}`, body.vote);
-        await transaction(`users/${body.votedUserId}/memes/${dateId}/points`, (currentPoints: number) => currentPoints + body.vote);
+        body.forEach(async (currentVote: { votedUserId: string, vote: number }) => {
+            await setData(`votes/${dateId}/${userId}/${currentVote.votedUserId}`, currentVote.vote);
+            await transaction(`users/${currentVote.votedUserId}/memes/${dateId}/points`, (currentPoints: number) => currentPoints + currentVote.vote);
+        });
 
         return NextResponse.json(true);
     }

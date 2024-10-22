@@ -5,6 +5,7 @@ import "./meme-generator.scss";
 import MemeApiService from "@/shared/services/MemeApi.service";
 import Spinner from "@/shared/components/spinner/spinner";
 import { UserContext } from "@/app/landing/landing";
+import Countdown from "@/shared/components/countdown/Countdown";
 
 export interface MemesData {
 	success: boolean;
@@ -92,48 +93,52 @@ export default function MemeGenerator() {
 	};
 
 	return (
-		<div className="meme-container">
-			{isLoading ? (
-				<div className="image-placeholder">
-					<Spinner></Spinner>
-				</div>
-			) : (
-				<img src={memeGenerated ?? meme?.url} alt="Random meme" />
-			)}
+		<div>
+			<Countdown limit={{ hour: 12, minutes: 30 }} />
 
-			<form method="post" onSubmit={handleSubmit}>
-				{Array.from({ length: meme?.box_count ?? 0 }, (_, i) => (
-					<label key={i}>
-						Caption {i + 1}
-						<input
-							name={"caption" + i}
-							type="text"
-							autoComplete="off"
-						/>
-					</label>
-				))}
-				{/* <div className="color-container">
-                    <div>
-                        <input type="checkbox" />
-                        <span>Custom color</span>
-                    </div>
-                    <input type="color" name="color" />
-                </div>
-                <div className="color-container">
-                    <div>
-                        <input type="checkbox" />
-                        <span>Custom outline color</span>
-                    </div>
-                    <input type="color" name="outsideColor" />
-                </div> */}
-				<button
-					type="submit"
-					disabled={isLoading}
-					className="submit-button"
-				>
-					Generar meme
-				</button>
-			</form>
+			<div className="meme-container">
+				{isLoading ? (
+					<div className="image-placeholder">
+						<Spinner></Spinner>
+					</div>
+				) : (
+					<img src={memeGenerated ?? meme?.url} alt="Random meme" />
+				)}
+
+				<form method="post" onSubmit={handleSubmit}>
+					{Array.from({ length: meme?.box_count ?? 0 }, (_, i) => (
+						<label key={i}>
+							Caption {i + 1}
+							<input
+								name={"caption" + i}
+								type="text"
+								autoComplete="off"
+							/>
+						</label>
+					))}
+					{/* <div className="color-container">
+		<div>
+			<input type="checkbox" />
+			<span>Custom color</span>
+		</div>
+		<input type="color" name="color" />
+	</div>
+	<div className="color-container">
+		<div>
+			<input type="checkbox" />
+			<span>Custom outline color</span>
+		</div>
+		<input type="color" name="outsideColor" />
+	</div> */}
+					<button
+						type="submit"
+						disabled={isLoading}
+						className="submit-button"
+					>
+						Generar meme
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 }
