@@ -6,6 +6,8 @@ import "./vote.scss";
 import Spinner from "@/shared/components/spinner/spinner";
 import { UserContext } from "@/app/landing/landing";
 import Countdown from "@/shared/components/countdown/Countdown";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 
 export default function Vote() {
 	const user = useContext(UserContext);
@@ -96,10 +98,12 @@ export default function Vote() {
 										key={meme.userId}
 										className="meme-detail"
 									>
-										<img
-											src={meme?.url}
-											alt="Current meme to vote"
-										/>
+										<Zoom>
+											<img
+												src={meme?.url}
+												alt="Current meme to vote"
+											/>
+										</Zoom>
 
 										<div className="button-wrap">
 											<input

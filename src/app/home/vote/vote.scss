@@ -23,6 +23,10 @@ $bronze: #CD7F32;
             display: flex;
             flex-direction: column;
 
+            img {
+                width: -webkit-fill-available;
+            }
+
             .button-wrap {
                 text-align: center;
 
