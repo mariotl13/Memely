@@ -5,9 +5,8 @@ import { useContext, useEffect, useState } from "react";
 import "./vote.scss";
 import Spinner from "@/shared/components/spinner/spinner";
 import { UserContext } from "@/app/landing/landing";
-import Countdown from "@/shared/components/countdown/Countdown";
-import Zoom from "react-medium-image-zoom";
-import "react-medium-image-zoom/dist/styles.css";
+import Countdown from "@/shared/components/countdown/countdown";
+import MemeImg from "@/shared/components/meme-img/meme-img";
 
 export default function Vote() {
 	const user = useContext(UserContext);
@@ -98,12 +97,10 @@ export default function Vote() {
 										key={meme.userId}
 										className="meme-detail"
 									>
-										<Zoom>
-											<img
-												src={meme?.url}
-												alt="Current meme to vote"
-											/>
-										</Zoom>
+										<MemeImg
+											src={meme?.url}
+											alt="Current meme to vote"
+										/>
 
 										<div className="button-wrap">
 											<input
@@ -125,8 +122,9 @@ export default function Vote() {
 												htmlFor={`${meme.userId}top1`}
 												className={
 													tops.top1 &&
-													tops.top1 !== meme.userId &&
-													"already-selected-top"
+													tops.top1 !== meme.userId
+														? "already-selected-top"
+														: ""
 												}
 											>
 												<img
@@ -153,8 +151,9 @@ export default function Vote() {
 												htmlFor={`${meme.userId}top2`}
 												className={
 													tops.top2 &&
-													tops.top2 !== meme.userId &&
-													"already-selected-top"
+													tops.top2 !== meme.userId
+														? "already-selected-top"
+														: ""
 												}
 											>
 												<img
@@ -181,8 +180,9 @@ export default function Vote() {
 												htmlFor={`${meme.userId}top3`}
 												className={
 													tops.top3 &&
-													tops.top3 !== meme.userId &&
-													"already-selected-top"
+													tops.top3 !== meme.userId
+														? "already-selected-top"
+														: ""
 												}
 											>
 												<img

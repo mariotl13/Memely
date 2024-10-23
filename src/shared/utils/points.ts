@@ -34,9 +34,9 @@ export function calcTop3(votes: Puntuaciones) {
         });
     });
 
-    // Restar 8 puntos a las personas que no hayan votado al resto de compañeros
+    // Restar 2 puntos a las personas que no hayan votado al resto de compañeros
     Object.keys(puntuacionesRecibidas).forEach(key => {
-        if (!votes[key]) puntuacionesRecibidas[key] -= 8;
+        if (!votes[key]) puntuacionesRecibidas[key] -= 2;
     })
 
     // Convertir el objeto en una matriz de pares [usuario, puntuación]

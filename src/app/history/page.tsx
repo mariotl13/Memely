@@ -6,6 +6,7 @@ import MemeApiService from "@/shared/services/MemeApi.service";
 import CustomDatePicker from "@/shared/components/custom-datepicker/custom-datepicker";
 import Spinner from "@/shared/components/spinner/spinner";
 import { getDateId } from "@/shared/utils/date";
+import MemeImg from "@/shared/components/meme-img/meme-img";
 
 export default function History() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -44,7 +45,7 @@ export default function History() {
 					points: userValue?.["memes"]?.[selectedDate]?.points,
 				};
 				if (!historyData.votes?.[selectedDate][user]) {
-					newMeme.points -= 8;
+					newMeme.points -= 2;
 				}
 				return newMeme;
 			})
@@ -80,7 +81,7 @@ export default function History() {
 													{meme.userName} -{" "}
 													{meme.points} points
 												</h3>
-												<img
+												<MemeImg
 													src={meme.url}
 													alt={
 														"Meme del día" +

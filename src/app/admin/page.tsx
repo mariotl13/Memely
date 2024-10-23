@@ -5,6 +5,7 @@ import MemeApiService from "@/shared/services/MemeApi.service";
 import { ChangeEvent, useEffect, useState } from "react";
 import "./admin.scss";
 import { Meme, MemesData } from "../home/meme-generator/meme-generator";
+import MemeImg from "@/shared/components/meme-img/meme-img";
 
 export interface AdminInfo {
 	status: StatusType;
@@ -134,7 +135,7 @@ export default function Admin() {
 								Generar nueva plantilla
 							</button>
 							{adminInfo?.meme?.url && (
-								<img
+								<MemeImg
 									src={adminInfo?.meme?.url}
 									alt="Plantilla actual"
 								/>

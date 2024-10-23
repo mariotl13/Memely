@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import "./user-info.scss";
 import Spinner from "@/shared/components/spinner/spinner";
 import { formatDateString } from "@/shared/utils/date";
+import MemeImg from "@/shared/components/meme-img/meme-img";
 
 export interface UserData {
 	mail: string;
@@ -60,7 +61,7 @@ export default function UserInfo({ params }: any) {
 												"es-ES"
 											).format(meme?.date)}
 										</h3>
-										<img
+										<MemeImg
 											src={meme?.url}
 											alt={"Meme del día" + meme?.id}
 										/>
