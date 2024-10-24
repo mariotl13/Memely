@@ -5,7 +5,7 @@ import "./meme-generator.scss";
 import MemeApiService from "@/shared/services/MemeApi.service";
 import Spinner from "@/shared/components/spinner/spinner";
 import { UserContext } from "@/app/landing/landing";
-import Countdown from "@/shared/components/countdown/countdown";
+import Countdown from "@/shared/components/countdown/Countdown";
 import MemeImg from "@/shared/components/meme-img/meme-img";
 
 export interface MemesData {

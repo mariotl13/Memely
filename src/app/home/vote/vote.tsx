@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import "./vote.scss";
 import Spinner from "@/shared/components/spinner/spinner";
 import { UserContext } from "@/app/landing/landing";
-import Countdown from "@/shared/components/countdown/countdown";
+import Countdown from "@/shared/components/countdown/Countdown";
 import MemeImg from "@/shared/components/meme-img/meme-img";
 
 export default function Vote() {
