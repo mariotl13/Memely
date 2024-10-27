@@ -38,10 +38,10 @@ export async function POST(request: NextRequest, { params }: any) {
         const dateId = getDateId(new Date());
         const body = await request.json();
 
-        body.forEach(async (currentVote: { votedUserId: string, vote: number }) => {
+        for (const currentVote of body) {
             await setData(`votes/${dateId}/${userId}/${currentVote.votedUserId}`, currentVote.vote);
             await transaction(`users/${currentVote.votedUserId}/memes/${dateId}/points`, (currentPoints: number) => currentPoints + currentVote.vote);
-        });
+        }
 
         return NextResponse.json(true);
     }

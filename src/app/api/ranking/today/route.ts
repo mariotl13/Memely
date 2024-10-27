@@ -27,7 +27,7 @@ export async function POST() {
 
         const todayRank = calcTop3(votes);
 
-        Object.keys(todayRank).forEach(async usuario => {
+        for (const usuario of Object.keys(todayRank)) {
             if (todayRank[usuario] !== 0) {
                 await transaction(`users/${usuario}/points`, (currentPoints: number) => currentPoints + todayRank[usuario]);
                 await setData(`winners/${memeId}/${usuario}`, {
@@ -36,7 +36,7 @@ export async function POST() {
                     memeUrl: users[usuario].memes[memeId].url
                 });
             }
-        });
+        }
 
         return NextResponse.json(true);
     }
