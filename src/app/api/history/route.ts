@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getData } from "@/firebase/database/database.service";
 import { getDateId } from "@/shared/utils/date";
 
+export const dynamic = 'force-dynamic';
 export async function GET() {
     try {
         const templates = await getData('templates');

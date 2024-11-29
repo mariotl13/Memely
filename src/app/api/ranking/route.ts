@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getData } from "@/firebase/database/database.service";
 
+export const dynamic = 'force-dynamic';
 export async function GET() {
     try {
         const data = await getData('users');
