@@ -90,6 +90,20 @@ export default function Vote() {
 					</h1>
 
 					{memes && (
+						<button
+							onClick={handleOnClickConfirmVotes}
+							className="submit-button"
+							disabled={
+								!Object.values(tops).every(
+									(value) => value !== undefined
+								)
+							}
+						>
+							Confirmar votos
+						</button>
+					)}
+
+					{memes && (
 						<div className="memes-container">
 							{memes.map((meme) => {
 								return (
