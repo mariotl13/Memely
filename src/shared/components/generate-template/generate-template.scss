@@ -13,6 +13,23 @@ form {
         img {
             width: 400px;
         }
+
+        .generate-template {
+            height: 47px;
+            padding: 16px;
+            border-radius: 4px;
+
+            border: none;
+            color: white;
+
+            cursor: pointer;
+            text-wrap: nowrap;
+            background-color: #3399CC;
+
+            &:hover:not(:disabled) {
+                background-color: #175b7c;
+            }
+        }
     }
 }
 

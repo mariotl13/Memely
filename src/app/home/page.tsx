@@ -2,12 +2,16 @@
 
 import MemeApiService from "@/shared/services/MemeApi.service";
 import { useEffect, useState } from "react";
-import { AdminInfo, StatusType } from "../admin/page";
 import MemeGenerator from "./meme-generator/meme-generator";
 import Vote from "./vote/vote";
 import Winner from "./winner/winner";
 import Spinner from "@/shared/components/spinner/spinner";
 import { Winners } from "@/shared/utils/points";
+import ChoseTemplate from "./chose-template/chose-template";
+import {
+	AdminInfo,
+	StatusType,
+} from "@/shared/components/generate-template/GenerateTemplate";
 
 export default function Home() {
 	const [info, setInfo] = useState<AdminInfo>();
@@ -45,7 +49,11 @@ export default function Home() {
 					);
 				}
 			case "meming":
-				return <MemeGenerator></MemeGenerator>;
+				if (info?.meme) {
+					return <MemeGenerator></MemeGenerator>;
+				} else {
+					return <ChoseTemplate></ChoseTemplate>;
+				}
 			case "voting":
 				return <Vote></Vote>;
 		}

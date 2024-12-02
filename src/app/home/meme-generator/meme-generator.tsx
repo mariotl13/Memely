@@ -120,20 +120,6 @@ export default function MemeGenerator() {
 							/>
 						</label>
 					))}
-					{/* <div className="color-container">
-		<div>
-			<input type="checkbox" />
-			<span>Custom color</span>
-		</div>
-		<input type="color" name="color" />
-	</div>
-	<div className="color-container">
-		<div>
-			<input type="checkbox" />
-			<span>Custom outline color</span>
-		</div>
-		<input type="color" name="outsideColor" />
-	</div> */}
 					<button
 						type="submit"
 						disabled={isLoading}
