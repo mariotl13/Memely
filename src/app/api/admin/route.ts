@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getData, setData } from "@/firebase/database/database.service";
 import { getDateId } from "@/shared/utils/date";
-import { AdminInfo } from "@/app/admin/page";
+import { AdminInfo } from "@/shared/components/generate-template/GenerateTemplate";
 
 export async function GET() {
     try {
